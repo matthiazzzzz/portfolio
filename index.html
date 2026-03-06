@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Matthias Tan</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f5f0;
+      --ink: #1a1916;
+      --muted: #7a776e;
+      --accent: #c25a2a;
+      --rule: #dedad2;
+      --card: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 80px 5vw 80px;
+    }
+
+    section { margin-bottom: 80px; }
+
+    /* HERO */
+    .hero-name-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+
+    .hero-photo-wrap {
+      flex-shrink: 0;
+      margin-right: 40px;
+    }
+
+    .hero-photo {
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      border: 3px solid var(--rule);
+    }
+
+    .hero-label {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 7vw, 4rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-bio {
+      font-size: 1rem;
+      color: var(--muted);
+      width: 100%;
+      margin-bottom: 32px;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 1.8rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta-text {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      color: var(--ink);
+    }
+
+    .hero-meta a {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .hero-meta a:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* SECTION HEADER */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .section-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      padding: 28px 32px;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .project-title {
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    .project-arrow {
+      color: var(--muted);
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .project-card:hover .project-arrow {
+      color: var(--accent);
+      transform: translate(3px, -3px);
+    }
+
+    .project-desc {
+      font-size: 0.93rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .tag {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 10px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--rule);
+      padding: 3px 9px;
+    }
+
+    /* EXPERIENCE */
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 34px;
+    }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 0 28px;
+    }
+
+    .exp-date {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      padding-top: 3px;
+      line-height: 1.5;
+    }
+
+    .exp-role {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .exp-company {
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .exp-detail {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 2px;
+    }
+
+    .skill-cell {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      padding: 20px 24px;
+    }
+
+    .skill-category {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .skill-items {
+      font-size: 0.9rem;
+      color: var(--ink);
+      line-height: 1.9;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--rule);
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 28px 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-name {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.4rem;
+    }
+
+    .footer-links a {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--ink); }
+
+    @media (max-width: 540px) {
+      .exp-item { grid-template-columns: 1fr; gap: 4px; }
+      .hero-name-row { gap: 16px; }
+      .hero-photo-wrap { margin-right: 0; }
+      .hero-photo { width: 130px; height: 130px; }
+    }
+  </style>
+</head>
+<body>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="about">
+    <p class="hero-label">Data Science &amp; Analytics</p>
+    <div class="hero-name-row">
+      <h1>Matthias<br><em>Tan</em></h1>
+      <div class="hero-photo-wrap">
+        <img class="hero-photo" src="matt_pic.png" alt="Matthias Tan" />
+      </div>
+    </div>
+    <p class="hero-bio">
+      A people-oriented data analytics professional with a strong passion for learning and collaborating with others. I thrive in environments where diverse perspectives drive growth, using data insights to help businesses enhance their operations and make informed decisions. I'm also excited by the potential of cloud solutions to drive efficiency and innovation — and I'm always eager to contribute, connect, and grow in a meaningful role.
+    </p>
+    <div class="hero-meta">
+      <span class="hero-meta-text">matthiastan000@gmail.com</span>
+      <a href="https://www.linkedin.com/in/matthiastankh" target="_blank">LinkedIn ↗</a>
+      <a href="tel:+6596573009">+65 9657 3009</a>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header">
+      <span class="section-label">Projects</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="projects-grid">
+
+      <a class="project-card" href="https://github.com/robbiechia/character_LLM" target="_blank">
+        <div class="project-top">
+          <span class="project-title">Character-Level Transformer Language Model</span>
+          <span class="project-arrow">↗</span>
+        </div>
+        <p class="project-desc">Built a compact decoder-only Transformer trained on the Text8 corpus (100M characters of cleaned Wikipedia) for next-character prediction. Starting from a 3.2M-parameter baseline, we ran systematic architectural ablations — varying attention mechanisms, positional encoding, model depth and width — then applied Bayesian optimisation for learning rate, weight decay, and regularisation to arrive at a final generalising model.</p>
+        <div class="project-tags">
+          <span class="tag">Transformer</span>
+          <span class="tag">Python</span>
+          <span class="tag">NLP</span>
+          <span class="tag">Bayesian Optimisation</span>
+          <span class="tag">PyTorch</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://github.com/bernisschow/CS3244-Fraud-Detection-in-Electricity-and-Gas-Consumption" target="_blank">
+        <div class="project-top">
+          <span class="project-title">Fraud Detection in Electricity &amp; Gas Consumption</span>
+          <span class="project-arrow">↗</span>
+        </div>
+        <p class="project-desc">The Tunisian Company of Electricity and Gas (STEG) suffered ~200 million Tunisian Dinars in losses from meter fraud. We built a full ML pipeline to detect fraudulent consumption: exploratory data analysis, feature engineering, and SMOTE resampling to handle class imbalance, then benchmarked six models — KNN, Decision Trees, SVM, Logistic Regression, Naïve Bayes, and Neural Networks — to identify the most effective approach.</p>
+        <div class="project-tags">
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Python</span>
+          <span class="tag">SMOTE</span>
+          <span class="tag">Feature Engineering</span>
+          <span class="tag">SVM</span>
+          <span class="tag">Neural Networks</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://github.com/robbiechia/Campus-Security" target="_blank">
+        <div class="project-top">
+          <span class="project-title">E-commerce Performance Analysis &amp; Optimisation</span>
+          <span class="project-arrow">↗</span>
+        </div>
+        <p class="project-desc">A modular, Dockerised analytics platform tackling key e-commerce challenges — demand forecasting, inventory management, pricing strategy, delivery optimisation, and customer churn. Built nine independent pipeline modules covering sentiment analysis, behaviour analysis, marketing analytics, and a live dashboarding layer, all orchestrated via Docker Compose.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Docker</span>
+          <span class="tag">NLP</span>
+          <span class="tag">Churn Prediction</span>
+          <span class="tag">Data Pipelines</span>
+        </div>
+      </a>
+
+      <div class="project-card">
+        <div class="project-top">
+          <span class="project-title">Twitter Sentiment Analysis</span>
+        </div>
+        <p class="project-desc">Trained and compared three classification models — Logistic Regression, Neural Network, and Naïve Bayes — on a 100,000-entry Twitter dataset. Applied hyperparameter tuning to optimise each model's accuracy and generalisation across sentiment classes.</p>
+        <div class="project-tags">
+          <span class="tag">NLP</span>
+          <span class="tag">Python</span>
+          <span class="tag">Logistic Regression</span>
+          <span class="tag">Neural Networks</span>
+          <span class="tag">Naïve Bayes</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-header">
+      <span class="section-label">Experience</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-date">Jan 2026 – Present</div>
+        <div>
+          <div class="exp-role">Data Analyst Intern</div>
+          <div class="exp-company">TikTok</div>
+          <p class="exp-detail">Designed and maintained interactive dashboards to track key performance metrics across project progress, productivity, and accuracy — used weekly by stakeholders for decision-making at management level. Cleaned and managed data to ensure reliable reporting. Analysed performance data from labellers, QA teams, and arbitrators to surface inefficiencies and flag policy ambiguities. Collaborated with project managers on Root Cause Analysis (RCA) workflows, acting as a bridge between teams to deliver timely, comprehensive insights.</p>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">May – Jul 2025</div>
+        <div>
+          <div class="exp-role">Data Analyst Intern</div>
+          <div class="exp-company">Pleodata</div>
+          <p class="exp-detail">Earned the Microsoft DP-600 (Fabric Analytics Engineer) certification. Developed and presented demo projects using Microsoft Fabric at a convention, showcasing how the platform unifies analytics workflows. Shadowed client sales pitches and enhanced Power BI visualisations for ongoing projects.</p>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">May – Nov 2024</div>
+        <div>
+          <div class="exp-role">Data Analyst Intern</div>
+          <div class="exp-company">Pleodata</div>
+          <p class="exp-detail">Earned the Microsoft PL-300 (Power BI) certification. Built standardised visualisation templates and conducted descriptive and predictive analytics for manufacturing clients, focusing on inventory management, demand forecasting, and supply chain optimisation.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-header">
+      <span class="section-label">Skills &amp; Certifications</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-cell">
+        <div class="skill-category">Skills</div>
+        <div class="skill-items">Python<br>R<br>Java<br>SQL<br>Power BI<br>Microsoft Fabric</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-category">Certifications</div>
+        <div class="skill-items">PL-300 Power BI<br>DP-600 Fabric</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="footer-name">Matthias Tan · NUS Data Science &amp; Analytics</span>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/matthiastankh" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+</body>
+</html>
